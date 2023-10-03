@@ -6,7 +6,7 @@ class ProductManager {
         this.products = [];
         this.autoIncrementId = 1;
     }
-    
+
     addProduct(title, description, price, thumbnail, code, stock) {
         
         if (!title || !description || !price || !thumbnail || !code || stock === undefined) {
@@ -19,20 +19,31 @@ class ProductManager {
             return;
         }
         
-        const product = {
+        const newProduct = {
             id: this.autoIncrementId++,
             title,
             description,
-            price,
+            price,  
             thumbnail,
             code,
             stock,
         };
-        this.products.push(product);
+        this.products.push(newProduct);
+        
+        
+        fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2), 'utf8');
     }
+    
     getProducts() {
-        return this.products;
-    }
+        try {
+            const data = fs.readFileSync(this.path, 'utf8');
+            const productsFromFile = JSON.parse(data);
+            return productsFromFile;
+        } catch (error) {
+            console.error("Error al leer el archivo:", error);
+            return [];
+        }
+    }  
     getProductById(id) {
         
         try {
@@ -41,7 +52,7 @@ class ProductManager {
 
             const product = productsFromFile.find((product) => product.id === id);
             if (!product) {
-            console.log("Producto no encontrado.");
+            console.log(`Producto con id:${id} no encontrado.`);
             }
             return product;
             } catch (error) {
@@ -91,4 +102,6 @@ class ProductManager {
         }
     }
 }
+
+const productManager = new ProductManager();
 
