@@ -1,0 +1,20 @@
+{
+  "name": "backendcourse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristianobus0909/cursoBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristianobus0909/cursoBackend/issues"
+  },
+  "homepage": "https://github.com/cristianobus0909/cursoBackend#readme"
+}

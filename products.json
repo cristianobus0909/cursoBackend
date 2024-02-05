@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Camara Cannon",
+    "description": "Camara Canon DSLR 45mp",
+    "price": 6000,
+    "thumbnail": "https://i.ibb.co/JxhjHgQ/c",
+    "code": "CAN-01",
+    "stock": 8
+  }
+]
