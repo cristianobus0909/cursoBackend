@@ -64,6 +64,7 @@ class ProductManager  {
             }
         } catch (error) {
             console.error(error, 'No se encontro el id del producto')
+            return null;
         }
         
     }
@@ -106,7 +107,7 @@ class ProductManager  {
         }
     };
 }
-const productManager = new ProductManager('./products.json')
+const productManager = new ProductManager('../products.json')
 
 export default productManager;
 
