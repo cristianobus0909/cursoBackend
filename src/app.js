@@ -18,6 +18,7 @@ app.get('/products',  async (req, res)=>{
         if(!isNaN(limit) && limit > 0) {
             products = products.slice(0, limit);
         };
+        return res.status(200).send(products);
     }catch(err){
         res.status(500).json({ error: 'Error al obtener los productos' });
     }
