@@ -7,5 +7,63 @@
     "thumbnail": "https://i.ibb.co/JxhjHgQ/c",
     "code": "CAN-01",
     "stock": 8
+  },
+  {
+    "id": 2,
+    "title": "Zoom Lens",
+    "description": "Lentille zoom de 30mm pour la Camara Canon",
+    "price": 1500,
+    "thumbnail": "https://i.ibb.co/GmzqKWd/zoom.jpg",
+    "code":"CAN-02"
+  },
+  {
+    "id": 3,
+    "title": "Telephoto Lens",
+    "description": "Lentille telephoto de 70mm pour la Camara Canon",
+    "price": 2500,
+    "thumbnail": "https://i.ibb.co/YXvPV9M/t.png",
+    "code": "TPHO-01",
+    "stock":10
+  },
+  {
+    "id": 4,
+    "title": "Smartphone",
+    "description": "IPhone XS Max 512Go",
+    "price": 1200,
+    "thumbnail": "https://i.ibb.co/NpDyFwB/s.jpg",
+    "code": "IPHONE-01",
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "title": "Headset Gaming",
+    "description": "Headset gaming pour smartphone",
+    "price": 100,
+    "thumbnail": "https://i.ibb.co/rkfVnZX/headset.jpg",
+    "code": "HEADSET-01",
+    "stock": 15
+  },
+  {
+    "id":6,
+    "title": "Monitor Samsung",
+    "description": "Moniteur Samsung 24 Inch Full HD",
+    "price": 350,
+    "thumbnail": "https://i.ibb.co/jgQRJ8c/monitor.jpg",
+    "code": "SAMSUNG-01",
+    "stock": 5
+  },
+  {
+    "id": 7,
+    "title": "Webcam",
+    "description": "Caméra web pour ordinateur portable",
+    "price": 50,
+    "thumbnail": "https://i.ibb.co/CWKmzqh/webcam.jpg",
+    "code": "WEBCAM-01",
+    "stock": 10
   }
+
+
+
+
+
 ]

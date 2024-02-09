@@ -9,18 +9,18 @@ class ProductManager  {
         this.autoIncrementId = 1;
     }
     //obtener o leer  el archivo de productos 
-    getProducts = async()=>{
+    getProducts = async () => {
         try {
             const data = await fs.promises.readFile(this.path, 'utf-8');
-            const products = JSON.parse(data);
-            return products;
+            this.products = JSON.parse(data);
+            console.log(this.products);
+            return this.products; 
         } catch (error) {
             console.error(error, 'No se pudo obtener ningún archivo');
-            return []
+            return []; 
         }
-                
-        
     }
+    
     //agregar un producto
     addProduct = async(title,description,price,thumbnail,code,stock)=>{
         try {
@@ -54,8 +54,8 @@ class ProductManager  {
     getProductById = async(productId)=>{
         try {
             const data = await fs.promises.readFile(this.path, 'utf-8');
-            const products = JSON.parse(data);
-            const productById = products.find((e)=>e.id === productId)
+            this.products = JSON.parse(data);
+            const productById = this.products.find((e) => e.id === parseInt(productId));
             if (!productById) {
                 return console.log('No se encontró el producto');
             }else {
@@ -107,7 +107,7 @@ class ProductManager  {
         }
     };
 }
-const productManager = new ProductManager('../products.json')
+const productManager = new ProductManager('./products.json')
 
 export default productManager;
 
