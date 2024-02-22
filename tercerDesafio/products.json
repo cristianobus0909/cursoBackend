@@ -14,7 +14,8 @@
     "description": "Lentille zoom de 30mm pour la Camara Canon",
     "price": 1500,
     "thumbnail": "https://i.ibb.co/GmzqKWd/zoom.jpg",
-    "code":"CAN-02"
+    "code":"CAN-02",
+    "stock": 15
   },
   {
     "id": 3,
