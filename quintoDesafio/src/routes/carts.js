@@ -16,23 +16,24 @@ routerCarts.post("/", async (req, res) => {
     }
 });
 
-routerCarts.get("/:cid", (req, res) => {
+routerCarts.get("/:cid", async (req, res) => {
     const cartId = req.params.cid;
-    const cartProducts = cartManager.readCarts(cartId);
+    const cartProducts = await cartManager.readCarts(cartId);
     res.json(cartProducts);
 });
 
 
-routerCarts.post("/:cid/product/:pid", (req, res) => {
-    const cartId = req.params.cid;
-    const productId = req.params.pid;
-    const quantity = req.body.quantity;
-    const result = cartManager.addProductToCart(cartId, productId, quantity);
-
-    if (result) {
-    res.json({ message: "Producto agregado al carrito" });
-    } else {
-    res.status(404).json({ error: "Carrito no encontrado" });
+routerCarts.post("/:cid/product/:pid", async(req, res) => {
+    try {
+        const cartId = req.params.cid;
+        const productId = req.params.pid;
+        const quantity = req.body.quantity;
+        const result = await cartManager.addProductToCart(cartId, productId, quantity);
+        result ? res.json({ message: "Producto agregado al carrito" }) : res.status(404).json({ error: "Carrito no encontrado" });
+    } catch (error) {
+        console.log(error, 'error al agregar el producto');
+        return res.status(400).send("No se ha podido añadir el producto");    
     }
+
 });
 export default routerCarts;

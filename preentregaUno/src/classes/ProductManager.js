@@ -6,59 +6,68 @@ class ProductManager  {
     constructor(path){
         this.path = path;
         this.products = [];
-        this.autoIncrementId = Math.floor(Math.random()*99999).toString();
+        this.autoIncrementId = Date.now().toString(36);
     }
     
     getProducts = async () => {
         try {
             const data = await fs.promises.readFile(this.path, 'utf-8');
-            const products = JSON.parse(data);
-            return products; 
+            this.products = JSON.parse(data);
+            return this.products; 
         } catch (error) {
             console.error(error, 'No se pudo obtener ningún archivo');
             return []; 
         }
     }
-    
-    //agregar un producto
-    addProduct = async (title, description, price, thumbnails, code, stock, status = true) => {
-    try {
-        if (!title || !description || !price || !thumbnails || !code || stock === undefined) {
-            console.log("Todos los campos son obligatorios.");
-            return;
-        }
+    addProduct = async (title,description,price,category,thumbnails,code,stock,status = true) => {
+        let newProduct;
         const data = await fs.promises.readFile(this.path, 'utf-8');
-        const productsFile = JSON.parse(data)
-        if (productsFile.some((product) => product.code === code)) {
-            console.log(`El producto con código ${code} ya existe.`);
-            return;
-        }
-        const existingProduct = this.products.find((product) => product.code === code);
-        if (existingProduct) {
-            existingProduct.quantity++;
-            console.log(`El producto con el código ${code} ahora tiene ${existingProduct.quantity} unidades.`);
-        }
-            const newProduct = {
-                id:  this.autoIncrementId,
-                title,
-                description,
-                price,
-                thumbnails,
-                code,
-                status,
-                stock,
-                quantity: 1
+        let productsFromFile = JSON.parse(data); 
+        try {
+            if (!title || !description || !price || !category || !thumbnails || !code || stock === undefined) {
+                console.log("Todos los campos son obligatorios.");
+                return;
             };
-            this.products.push(newProduct);
             
+            if (productsFromFile.some((product) => product.code === code.trim())) {
+                console.log(`El producto con código ${code} ya existe.`);
+                return;
+            };
             
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2), 'utf8');
-        return newProduct;
-    } catch (error) {
-        console.error(error, 'No se pudo agregar el producto');
+            const existingProduct = this.products.find((product) => product.code === code.trim());
+            if (existingProduct) {
+                existingProduct.quantity++;
+                console.log(`El producto con el código ${code} ahora tiene ${existingProduct.quantity} unidades.`);
+            }else{
+                newProduct = {
+                    id: this.autoIncrementId,
+                    title,
+                    description,
+                    price,
+                    category,
+                    thumbnails,
+                    code,
+                    status,
+                    stock,
+                    quantity: 1
+                };
+                this.products.push(newProduct);
+            }
+            
+            if (existingProduct) {
+                const existingProductIndex = productsFromFile.findIndex((product) => product.code.trim() === code.trim());
+                productsFromFile[existingProductIndex] = existingProduct;
+            } else {
+                productsFromFile.push(newProduct);
+            }
+            
+            await fs.promises.writeFile(this.path, JSON.stringify(productsFromFile, null, 2), 'utf8');
+            
+            return newProduct;
+        } catch (error) {
+            console.error(error, 'No se pudo agregar el producto');
+        }
     }
-}
-    //obtener producto por id
     getProductById = async(productId)=>{
         try {
             const data = await fs.promises.readFile(this.path, 'utf-8');
@@ -76,7 +85,7 @@ class ProductManager  {
         }
         
     }
-    //actualizar
+    
     updateProduct = async (id, updatedFields)=>{
         try {
             const data = await fs.promises.readFile(this.path, 'utf-8');
@@ -110,6 +119,7 @@ class ProductManager  {
             productsFromFile.splice(productIndex, 1);
             
             fs.writeFileSync(this.path, JSON.stringify(productsFromFile, null, 2), 'utf8');
+            return  true;
         } catch (error) {
             console.error("Error al leer o escribir en el archivo:", error);
         }

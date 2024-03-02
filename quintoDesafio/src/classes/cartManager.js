@@ -8,19 +8,19 @@ class CartManager {
         this.carts = [];
     };
 
-    createCart() {
+    createCart = async ()=> {
         try {
             const generateUniqueId = Math.floor(Math.random() * 1000000);
             const newCart = { id: generateUniqueId, products: [] };
-            fs.writeFileSync(this.cartDataPath, JSON.stringify(newCart, null, 2), 'utf-8');
+            await fs.promises.writeFile(this.cartDataPath, JSON.stringify(newCart, null, 2), 'utf-8');
             return newCart;
-            } catch (error) {
+        } catch (error) {
             console.error('Error al crear el carrito', error);
-            }  
+        }  
     };
-    readCarts(cartId) {
+    readCarts = async (cartId)=> {
         try {
-            const data = fs.readFileSync(this.cartDataPath, 'utf-8');
+            const data = await fs.promises.readFile(this.cartDataPath, 'utf-8');
             const cartsFromFile = JSON.parse(data);
             const cartFound = cartsFromFile.find((cart) => cart.id === cartId);
             if(!cartFound){
@@ -66,6 +66,6 @@ class CartManager {
     
 
 }
-const cartManager = new CartManager('../carts.json');
+const cartManager = new CartManager('./src/carts.json');
 
 export default cartManager;

@@ -24,12 +24,7 @@ routerProducts.get('/:pid',  async (req, res)=> {
     try {
         const productId = parseInt(req.params.pid);
         const product = await productManager.getProductById(productId);
-        console.log(product);
-        if (product) {
-            return res.json({product});
-        } else {
-            res.status(404).json({ error: 'Producto no encontrado' });
-        }
+        product ? res.json({product}) : res.status(404).json({ error: 'Producto no encontrado' });
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los productos por Id' });
     }
@@ -41,17 +36,14 @@ routerProducts.post( '/', async (req,res) => {
             title,
             description,
             price,
+            category,
             thumbnails,
             code,
             stock
         } = req.body;
-        const  newProduct = await productManager.addProduct(title,description,price,thumbnails,code,stock);
-        if (!newProduct) {
-            return res.status(201).json({ message: 'Producto agregado con éxito' });
-        } else {
-            return res.status(400).json({ error: "No se enviaron todos los campos" });
-        }
-    } catch (error) {
+        const  newProduct = await productManager.addProduct(title,description,price,category,thumbnails,code,stock);
+        !newProduct ? res.status(400).json({ error: "No es un producto valido" }) : res.status(201).json({ message: 'Producto agregado con éxito' });
+    }catch (error) {
         console.log('ERROR AL AGREGAR PRODUCTO');
         console.log(error);
         return res.status(500).json({ error: "No se pudo  agregar el producto" })
@@ -65,11 +57,7 @@ routerProducts.put("/:pid",async (req,res) => {
     const product = req.body;
     try{
         const updatedProduct = await productManager.updateProduct(id,product);
-        
-        if (!updatedProduct) {
-            return res.status(404).json({ message: "No se ha podido actualizar el producto" })
-        }
-        res.status(201).json(updatedProduct);
+        updatedProduct ? res.status(201).json(updatedProduct) : res.status(404).json({ message: "No se ha podido actualizar el producto" });
     }catch(error){
         res.status(500).json({message:"Error en el servidor"});
     }
@@ -80,11 +68,7 @@ routerProducts.delete('/:pid', async (req, res) => {
     const prodID = parseInt(req.params.pid);
 
     const productDeleted = await productManager.deleteProduct(prodID);
-    
-    if(!productDeleted) {
-        return res.status(400).send("No se ha podido eliminar el producto");
-    }
-    res.status(200).send("Producto eliminado");
+    productDeleted ? res.status(200).send("Producto eliminado"): res.status(400).send("No se ha podido eliminar el producto");
 })
 
 export default routerProducts;
