@@ -2,27 +2,27 @@ import express from "express";
 import productManager from "../classes/ProductManager.js";
 import bodyParser from 'body-parser';
 import { io } from "../app.js";
-// import multer from "multer";
 
 
-const router = express.Router();
+
+const viewsRouter = express.Router();
 router.use(bodyParser.json());
 
 
-router.get('/', (req, res)=>{
+viewsRouter.get('/', (req, res)=>{
     const products = productManager.getProducts()
     res.render('home',{products})
 })
 
-router.get('/chat', (req, res)=>{
+viewsRouter.get('/chat', (req, res)=>{
     res.render('chat',{})
 })
 
-router.get('/realtimeproducts', (req, res)=>{
+viewsRouter.get('/realtimeproducts', (req, res)=>{
     const products = productManager.getProducts()
     res.render('realTimeProducts',{products})
 })
-router.post('/realtimeproducts', async(req, res)=>{
+viewsRouter.post('/realtimeproducts', async(req, res)=>{
     const {
         title,
         description,
@@ -45,7 +45,7 @@ router.post('/realtimeproducts', async(req, res)=>{
     }
     res.redirect('/realtimeproducts');
 })
-router.delete('/realtimeproducts', async(req, res)=>{
+viewsRouter.delete('/realtimeproducts', async(req, res)=>{
     const productId = req.body.id
     
     try {
