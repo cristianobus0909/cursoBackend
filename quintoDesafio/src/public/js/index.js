@@ -41,10 +41,9 @@ const messageInnerHTML = (data) => {
 };
 
 socket.on("userConnection", (data) => {
-    chatMessage.innerHTML = `<p>${data.message}</p>`;
+    chatMessage.innerHTML = `<p>${data[0].message}</p>`;
     const connection = messageInnerHTML(data);
     chatMessage.innerHTML = connection;
-    
 });
 
 const inputMessage = document.getElementById("inputMessage");
@@ -103,7 +102,6 @@ document.getElementById('addProductForm').addEventListener('submit', (e) => {
 });
 
 
-
 document.getElementById('deleteProductForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const id = e.target.elements.productId.value;
@@ -111,7 +109,8 @@ document.getElementById('deleteProductForm').addEventListener('submit', (e) => {
 
     e.target.elements.productId.value = ''
 
-    socket.on('productDeleted',(data)=>{
-        console.log(data.message)
-    })
+
 });
+socket.on('productDeleted',(data)=>{
+    console.log(data.message)
+})

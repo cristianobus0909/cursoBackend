@@ -1,19 +1,18 @@
-import express from "express";
+import { Router } from "express";
 import productManager from "../classes/ProductManager.js";
 import bodyParser from 'body-parser';
 import { io } from "../app.js";
 
 
 
-const viewsRouter = express.Router();
-router.use(bodyParser.json());
+const viewsRouter = Router();
+viewsRouter.use(bodyParser.json());
 
 
 viewsRouter.get('/', (req, res)=>{
     const products = productManager.getProducts()
-    res.render('home',{products})
+    res.render('home',{products});
 })
-
 viewsRouter.get('/chat', (req, res)=>{
     res.render('chat',{})
 })
@@ -35,7 +34,7 @@ viewsRouter.post('/realtimeproducts', async(req, res)=>{
     
     const status = true
     try {
-        const newProduct =  await productManager.addProduct(title, description, price, category, status, thumbnails, code, stock);
+        const newProduct =  await productManager.addProduct(title,description,price,category,thumbnails,status,code,stock);
         console.log(newProduct);
         io.emit('productAdded', { product: newProduct });
         
@@ -62,4 +61,4 @@ viewsRouter.delete('/realtimeproducts', async(req, res)=>{
 })
 
 
-export default router;
+export default viewsRouter;
