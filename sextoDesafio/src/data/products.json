@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Headset Gaming",
+    "description": "Headset gaming pour smartphone",
+    "price": 100,
+    "category": "Gaming",
+    "thumbnails": "https://i.ibb.co/rkfVnZX/headset.jpg",
+    "code": "HEADSET-01",
+    "status": true,
+    "stock": 15,
+    "quantity": 1
+  },
+  {
+    "id": "lt90v574",
+    "title": "Zoom Lens",
+    "description": "Lentille zoom de 30mm pour la Camara Canon",
+    "price": 1500,
+    "category": "Lens",
+    "thumbnails": "https://i.ibb.co/GmzqKWd/zoom.jpg",
+    "code": "cam02",
+    "status": true,
+    "stock": 15,
+    "quantity": 1
+  }
+]
