@@ -17,6 +17,10 @@ viewsRouter.get('/', (req, res)=>{
     });
 })
 viewsRouter.get('/chat', (req, res)=>{
+    
+    socketServer.on("userMessage", (data)=>{
+        console.log('User Message: ', data);
+    });
     res.render('chat',{})
 })
 

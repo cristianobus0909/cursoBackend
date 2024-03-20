@@ -35,27 +35,46 @@ const server = app.listen(PORT, () => {
 
 const socketServer =  new Server(server)
 
+const message = [];
 
 const URL_MONGO = 'mongodb+srv://clbcristian:tpeyLRnudLy27oi2@cluster0.jpsemmz.mongodb.net/';
 mongoose.connect(URL_MONGO, {dbName: 'ecommerce'})
     .then(()=>{
         console.log('Db connectado !!');
 
-        let userName = "";
-
-        socketServer.on("userConnection", (data) => {
-            userName = data.user;
-            message.push({
-                id: data.id,
-                info: "connection",
-                name: data.user,
-                message: `${data.user} Conectado`,
-                date: new Date().toTimeString(),
+        socketServer.on("connection", (socket) => {
+            console.log(`User ${socket.id} Connection`);
+        
+            let userName = "";
+        
+            socket.on("userConnection", (data) => {
+                userName = data.user;
+                message.push({
+                    id: socket.id,
+                    info: "connection",
+                    name: data.user,
+                    message: `${data.user} Conectado`,
+                    date: new Date().toTimeString(),
+                });
+                console.log(message);
+                socketServer.sockets.emit("userConnection", { message, nameUser: userName });
             });
-            socketServer.sockets.emit("userConnection", { message, nameUser: userName });
+        
+            socket.on("userMessage", (data) => {
+                message.push({
+                    id: socket.id,
+                    info: "message",
+                    name: userName,
+                    message: data.message,
+                    date: new Date().toTimeString(),
+                });
+                socketServer.sockets.emit("userMessage", message);
+            });
+        
+            socket.on("typing", (data) => {
+                socket.broadcast.emit("typing", data);
+            });
         });
-        socketServer.emit()
-
     })
     .catch(err => {
         console.error('Error conectando la BD:', err.message);

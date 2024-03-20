@@ -14,8 +14,11 @@ const messagesSchema = new mongoose.Schema({
         type: String,  
         required: true 
     },
-
-})
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
 const messageModel = mongoose.model(messagesCollections,messagesSchema)
 
