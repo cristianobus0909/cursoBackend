@@ -53,7 +53,7 @@ routerCarts.post('/:cid/product/:pid', async (req, res) => {
             return res.status(404).json({message:'Producto no encontrado'})
         }
         let cart = await cartModel.findOneAndUpdate(
-            { _id: cartId, 'products.productId': productById },
+            { _id: cartId, 'products.productId': productById._id },
             { $inc: { 'products.$.quantity': quantity } },
             { new: true }
         );
@@ -61,7 +61,7 @@ routerCarts.post('/:cid/product/:pid', async (req, res) => {
         if (!cart) {
             cart = await cartModel.findOneAndUpdate(
                 { _id: cartId },
-                { $push: { products: { productId: productById, quantity: quantity } } },
+                { $push: { products: { productId: productById._id, quantity: quantity } } },
                 { new: true, upsert: true }
             );
         }
