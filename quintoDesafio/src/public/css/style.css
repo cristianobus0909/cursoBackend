@@ -1,4 +1,4 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,7 +23,7 @@ div li{
 .card{
     border-color: black;
     
-}
+} */
 /* .chatContainer {
     width: 350px;
     margin: 0 auto;
@@ -93,7 +93,7 @@ div li{
     padding: 0px 0px 5px 5px;
 } */
 
-.deleteProductForm, .addProductForm{
+/* .deleteProductForm, .addProductForm{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -110,4 +110,4 @@ div li{
     justify-content: center;
     align-items: center;
     width: 80vw;
-}
+} */

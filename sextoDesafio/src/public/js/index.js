@@ -1,21 +1,36 @@
 const userName = document.querySelector(".userName");
 const socket = io();
 let nameUser = "";
+let emailUser = "";
 
 
 Swal.fire({
     title: "Ingrese su Nombre",
-    input: "text",
-    inputAttributes: {
-        autocapitalize: "on",
-    },
+    html:
+        '<input id="name" class="swal2-input" placeholder="Nombre" autocapitalize="on">' +
+        '<input id="email" class="swal2-input" placeholder="Correo Electrónico" autocapitalize="on">',
     showCancelButton: false,
     confirmButtonText: "Ingesar",
 }).then((result) => {
-    userName.textContent = result.value;
-    nameUser = result.value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    if (result.isConfirmed) {
+        // console.log(name);
+        // console.log(email);
+        nameUser = name;
+        emailUser = email
+        socket.emit("newUser", name, email);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        alert("Por favor ingrese un nombre de usuario")
+    }
+    userName.textContent = name;
+    console.log(nameUser);
+    nameUser = name;
+    emailUser = email;
+    console.log(emailUser, nameUser);
     socket.emit("userConnection", {
-        user: result.value,
+        user: nameUser,
+        email: emailUser
     });
 });
 const chatMessage = document.querySelector(".chatMessage");
@@ -41,9 +56,13 @@ const messageInnerHTML = (data) => {
 };
 
 socket.on("userConnection", (data) => {
-    chatMessage.innerHTML = `<p>${data[0].message}</p>`;
-    const connection = messageInnerHTML(data);
-    chatMessage.innerHTML = connection;
+    if (data && data.length > 0) {
+        chatMessage.innerHTML = `<p>${data[0].message}</p>`;
+        const connection = messageInnerHTML(data);
+        chatMessage.innerHTML = connection;
+    } else {
+        console.error("No hay mensajes para mostrar.");
+    }
 });
 
 const inputMessage = document.getElementById("inputMessage");

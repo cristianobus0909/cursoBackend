@@ -16,8 +16,10 @@
 </nav>
 <div class="listContainer text-center" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
     <h2 class="text-uppercase" id="scrollspyHeading1">Lista de Productos</h2>
-
-    {{products}}
+    {{#each products}}
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy mb-4"></div>
+        {{>products}}
+    {{/each}}
     
     <h2 id="scrollspyHeading2"></h2>
     

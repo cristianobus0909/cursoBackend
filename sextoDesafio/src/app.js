@@ -8,7 +8,7 @@ import viewsRouter from "./routes/views.router.js";
 import routerProducts from "./routes/products.router.js";
 import routerCarts from "./routes/carts.router.js";
 import mongoose from  'mongoose';
-
+import messageModel from "./Dao/models/messages.models.js";
 
 const  app = express();
 const PORT = 8080;
@@ -46,16 +46,22 @@ mongoose.connect(URL_MONGO, {dbName: 'ecommerce'})
             console.log(`User ${socket.id} Connection`);
         
             let userName = "";
-        
-            socket.on("userConnection", (data) => {
+            
+            socket.on("userConnection", async (data) => {
                 userName = data.user;
+                let userMail = data.email;
                 message.push({
                     id: socket.id,
                     info: "connection",
                     name: data.user,
+                    email: data.email,
                     message: `${data.user} Conectado`,
                     date: new Date().toTimeString(),
                 });
+                const messageUser = message.find(e => e.email === userMail);
+
+                console.log(messageUser);
+                await messageModel.create({user: userMail, message:messageUser.message, date:messageUser.date});
                 console.log(message);
                 socketServer.sockets.emit("userConnection", { message, nameUser: userName });
             });
@@ -68,6 +74,7 @@ mongoose.connect(URL_MONGO, {dbName: 'ecommerce'})
                     message: data.message,
                     date: new Date().toTimeString(),
                 });
+
                 socketServer.sockets.emit("userMessage", message);
             });
         

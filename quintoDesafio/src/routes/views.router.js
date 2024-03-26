@@ -11,7 +11,10 @@ viewsRouter.use(bodyParser.json());
 
 viewsRouter.get('/', (req, res)=>{
     const products = productManager.getProducts()
-    res.render('home',{products});
+    res.render('home',{
+        title: 'Backend | Handlebars',
+        products: products
+    });
 })
 viewsRouter.get('/chat', (req, res)=>{
     res.render('chat',{})
