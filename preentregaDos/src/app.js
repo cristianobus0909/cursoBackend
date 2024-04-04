@@ -59,6 +59,7 @@ mongoose.connect(URL_MONGO, {dbName: 'ecommerce'})
                     date: new Date().toTimeString(),
                 });
                 const messageUser = message.find(e => e.email === userMail);
+
                 console.log(messageUser);
                 await messageModel.create({user: userMail, message:messageUser.message, date:messageUser.date});
                 console.log(message);

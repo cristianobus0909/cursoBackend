@@ -1,0 +1,205 @@
+[
+    {
+        "title": "Cámara DSLR Canon EOS Rebel T7",
+        "price": 599.99,
+        "description": "Cámara réflex digital con sensor CMOS de 24.1 megapíxeles, pantalla LCD de 3 pulgadas y grabación de video Full HD.",
+        "category": "Cámaras",
+        "thumbnails": [
+            "https://example.com/camera1-thumb1.jpg",
+            "https://example.com/camera1-thumb2.jpg"
+        ],
+        "code": "CANON-EOS-T7",
+        "stock": 10
+    },
+    {
+        "title": "Lente Canon EF 50mm f/1.8 STM",
+        "price": 129.99,
+        "description": "Lente de distancia focal fija y apertura máxima de f/1.8 para retratos y fotografía con poca luz.",
+        "category": "Lentes",
+        "thumbnails": [
+            "https://example.com/lens1-thumb1.jpg",
+            "https://example.com/lens1-thumb2.jpg"
+        ],
+        "code": "CANON-50MM-STM",
+        "stock": 5
+    },
+    {
+        "title": "Trípode de Cámara Neewer 62 pulgadas",
+        "price": 39.99,
+        "description": "Trípode de aluminio ajustable con cabezal panorámico de 360 grados y bolsa de transporte incluida.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/tripod1-thumb1.jpg",
+            "https://example.com/tripod1-thumb2.jpg"
+        ],
+        "code": "NEEWER-62IN-TRIPOD",
+        "stock": 20
+    },
+    {
+        "title": "Flash Godox TT350F TTL para Fujifilm",
+        "price": 89.99,
+        "description": "Flash compacto TTL con cabezal giratorio y funciones de sincronización de alta velocidad y transmisión inalámbrica.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/flash1-thumb1.jpg",
+            "https://example.com/flash1-thumb2.jpg"
+        ],
+        "code": "GODOX-TT350F",
+        "stock": 15
+    },
+    {
+        "title": "Filtro de Densidad Neutra Hoya ProND1000",
+        "price": 79.99,
+        "description": "Filtro ND de alta calidad con factor de reducción de luz de 10 pasos, ideal para largas exposiciones y fotografía de paisajes.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/ndfilter1-thumb1.jpg",
+            "https://example.com/ndfilter1-thumb2.jpg"
+        ],
+        "code": "HOYA-PROND1000",
+        "stock": 8
+    },
+    {
+        "title": "Estudio de Fotografía Neewer 700W",
+        "price": 199.99,
+        "description": "Kit de iluminación continua con dos softbox de 85W, trípodes ajustables y bolsa de transporte.",
+        "category": "Estudios",
+        "thumbnails": [
+            "https://example.com/lighting1-thumb1.jpg",
+            "https://example.com/lighting1-thumb2.jpg"
+        ],
+        "code": "NEEWER-700W-KIT",
+        "stock": 5
+    },
+    {
+        "title": "Maletín para Cámara AmazonBasics",
+        "price": 29.99,
+        "description": "Maletín de transporte acolchado con divisores ajustables, bolsillos exteriores y correa para el hombro.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/case1-thumb1.jpg",
+            "https://example.com/case1-thumb2.jpg"
+        ],
+        "code": "AMAZONBASICS-CASE",
+        "stock": 12
+    },
+    {
+        "title": "Cámara de Acción GoPro HERO9 Black",
+        "price": 399.99,
+        "description": "Cámara de acción con video 5K, fotos de 20 megapíxeles y pantalla táctil trasera.",
+        "category": "Cámaras",
+        "thumbnails": [
+            "https://example.com/gopro1-thumb1.jpg",
+            "https://example.com/gopro1-thumb2.jpg"
+        ],
+        "code": "GOPRO-HERO9",
+        "stock": 7
+    },
+    {
+        "title": "Trípode Flexible JOBY GorillaPod 3K",
+        "price": 49.99,
+        "description": "Trípode compacto con patas flexibles para adaptarse a cualquier superficie y soporte para cámaras DSLR y sin espejo.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/tripod1-thumb1.jpg"
+        ],
+        "code": "JOBY_GORILLAPOD3K",
+        "stock": 8
+    },
+    {
+        "title": "Cámara de Película Fujifilm Instax Mini 11",
+        "price": 69.99,
+        "description": "Cámara instantánea con lente fija, modo automático de exposición y espejo selfie incorporado.",
+        "category": "Cámaras",
+        "thumbnails": [
+            "https://example.com/instax1-thumb1.jpg",
+            "https://example.com/instax1-thumb2.jpg"
+        ],
+        "code": "INSTAX-MINI-11",
+        "stock": 15
+    },
+    {
+        "title": "Lente Sigma 35mm f/1.4 DG HSM Art para Nikon",
+        "price": 799.99,
+        "description": "Lente prime de alta calidad con apertura máxima de f/1.4 y excelente rendimiento en condiciones de poca luz.",
+        "category": "Lentes",
+        "thumbnails": [
+            "https://example.com/lens2-thumb1.jpg",
+            "https://example.com/lens2-thumb2.jpg"
+        ],
+        "code": "SIGMA-35MM-NIKON",
+        "stock": 3
+    },
+    {
+        "title": "Estabilizador de Gimbal DJI Ronin-S",
+        "price": 649.99,
+        "description": "Estabilizador de tres ejes para cámaras DSLR y sin espejo, con controles intuitivos y seguimiento de objetos inteligente.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/gimbal1-thumb1.jpg",
+            "https://example.com/gimbal1-thumb2.jpg"
+        ],
+        "code": "RONIN-S",
+        "stock": 6
+    },
+    {
+        "title": "Mochila para Cámara Lowepro ProTactic 450 AW II",
+        "price": 199.99,
+        "description": "Mochila resistente al clima con compartimentos personalizables, soporte para trípode y acceso rápido a la cámara.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/backpack1-thumb1.jpg",
+            "https://example.com/backpack1-thumb2.jpg"
+        ],
+        "code": "LOWEPRO-PROTACTIC-450",
+        "stock": 9
+    },
+    {
+        "title": "Luz de Anillo Neewer 18 pulgadas",
+        "price": 89.99,
+        "description": "Luz LED regulable con temperatura de color ajustable y montaje para cámara y teléfono.",
+        "category": "Iluminación",
+        "thumbnails": [
+            "https://example.com/ringlight1-thumb1.jpg",
+            "https://example.com/ringlight1-thumb2.jpg"
+        ],
+        "code": "NEEWER-18IN-RING",
+        "stock": 12
+    },
+    {
+        "title": "Mochila para Cámara Peak Design Everyday Backpack 20L",
+        "price": 259.99,
+        "description": "Mochila elegante y funcional con acceso lateral y superior, funda para laptop y divisores personalizables.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/backpack2-thumb1.jpg",
+            "https://example.com/backpack2-thumb2.jpg"
+        ],
+        "code": "PEAKDESIGN-20L-BACKPACK",
+        "stock": 4
+    },
+    {
+        "title": "Trípode de Viaje Manfrotto Befree Advanced",
+        "price": 189.99,
+        "description": "Trípode compacto y ligero con sistema de bloqueo de piernas M-Lock y cabeza de bola de liberación rápida.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/tripod2-thumb1.jpg",
+            "https://example.com/tripod2-thumb2.jpg"
+        ],
+        "code": "MANFROTTO-BEFREE",
+        "stock": 8
+    },
+    {
+        "title": "Mochila para Cámara Think Tank Photo Urban Approach 15",
+        "price": 189.99,
+        "description": "Mochila discreta y elegante con acceso lateral para cámara y divisores acolchados.",
+        "category": "Accesorios",
+        "thumbnails": [
+            "https://example.com/backpack3-thumb1.jpg",
+            "https://example.com/backpack3-thumb2.jpg"
+        ],
+        "code": "THINKTANK-URBAN-15",
+        "stock": 5
+    }
+]
