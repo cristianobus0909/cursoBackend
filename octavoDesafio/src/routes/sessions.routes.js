@@ -42,11 +42,11 @@ routerSessions.post('/login', async(req, res) => {
 });
 //Eliminar la session y cerrar la sesion del usuario
 routerSessions.get("/logout", (req,res)=>{
-    req.session.destroy( (error)=>{
-        if (!error) {res.redirect("/");
-        }else{
-            console.error("Error al cerrar sesión:", error);
-            res.status(500).send("Error interno del servidor");
+    req.session.destroy((error) => {
+        if (error) {
+            res.status(500).send({ message: "Error al Cerrar Sesión", error });
+        } else {
+            res.redirect("/");
         }
     });
 });
