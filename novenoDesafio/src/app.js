@@ -9,6 +9,9 @@ import viewsRouter from './routes/views.routes.js';
 import MongoStore from  'connect-mongo';
 import dotenv from  'dotenv';
 import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import initializePassport from './config/passport.config.js';
+
 
 dotenv.config();
 
@@ -30,8 +33,6 @@ app.use('/', express.static( __dirname + "/public"));
 
 app.use(cookieParser("s3cr3tC00ck13"));
 
-app.use(bodyParser.json());
-
 app.use(session({
     store: MongoStore.create({
         mongoUrl: URL_MONGO,
@@ -44,6 +45,9 @@ app.use(session({
     saveUninitialized: false,
 
 }))
+initializePassport();
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 app.use('/', viewsRouter)
 app.use('/users',routerViews)

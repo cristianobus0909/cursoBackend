@@ -15,9 +15,6 @@ routerViews.get('/', (req, res) => {
         user: req.session.user
     })
 });
-routerViews.get( '/logout', (req,res)=>{
-    res.redirect("/login")
-});
 
 
 export  default  routerViews;

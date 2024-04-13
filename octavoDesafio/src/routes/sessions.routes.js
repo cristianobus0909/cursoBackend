@@ -35,21 +35,44 @@ routerSessions.post('/login', async(req, res) => {
     req.session.user = {
         name:`${user.first_name} ${user.last_name}`,
         email:user.email,
-        age:user.age
+        age:user.age,
     }
+    if (user.email === "adminCoder@coder.com" && user.password === "adminCod3r123") {
+            req.session.user.role = "admin"
+    } else {
+            req.session.user.role = "user"
+        console.log("Tenes privilegios de"+ req.session.user.role);
+}
     res.status(200).send({payload: req.session.user, message: 'Inicio de sesion exitoso'});
 
 });
+
+async function autenticateUser(req,res,next){
+    if (!req.session.user) {
+        return res.status(401).json({ message: 'Debe iniciar sesión' });
+    }
+    next();
+}
+
+routerSessions.get('/private', autenticateUser, (req,res)=>{
+    console.log("Tenes privilegios de"+ req.session.user.role);
+    res.send(req.session.user.role);
+})
+routerSessions.get('/', autenticateUser, (req,res)=>{
+    console.log("Tenes privilegios de"+ req.session.user.role);
+    res.send(req.session.user.role);
+})
+
 //Eliminar la session y cerrar la sesion del usuario
 routerSessions.get("/logout", (req,res)=>{
     req.session.destroy((error) => {
         if (error) {
-            res.status(500).send({ message: "Error al Cerrar Sesión", error });
-        } else {
-            res.redirect("/");
-        }
+            return res.status(500).send({ message: "Error al Cerrar Sesión", error });
+        } 
+        res.status(200).send({message:"La sesión se ha cerrado correctamente"});
     });
 });
 
 
 export  default  routerSessions;
+
