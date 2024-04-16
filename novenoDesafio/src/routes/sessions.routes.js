@@ -1,11 +1,11 @@
 import { Router } from "express";
 import userModel from "../models/userModel.js";
-import { createHash, isValidPassword } from "../utils.js";
+// import { createHash, isValidPassword } from "../utils.js";
 import passport from "passport";
 
 const routerSessions = Router();
 
-routerSessions.post('/register', passport.authenticate('register',{failureRedirect:'/failregister'}), async (req, res) => {
+routerSessions.post('/register', passport.authenticate('register',{failureRedirect:'/api/sessions/failregister'}), async (req, res) => {
     res.send({status:'success', message: 'User registered'})
     // try{
     //     const { first_name, last_name, age, email, password } = req.body;
@@ -33,9 +33,9 @@ routerSessions.get('/failregister', async(req, res)=>{
     console.log('Failed Strategy');
     res.send({error: 'Failed'});
 })
-routerSessions.post('/login',passport.authenticate('login',{failureRedirect:'/faillogin'}), async(req, res) => {
-    // const {email, password} = req.body
-    // const user = await userModel.findOne({email,password})
+routerSessions.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/faillogin'}), async(req, res) => {
+    const {email, password} = req.body
+    const user = await userModel.findOne({email,password})
     if (!user) {
         return res.status(401).json('No autorizado')
     }
@@ -63,6 +63,9 @@ routerSessions.get("/logout", (req,res)=>{
 routerSessions.get('/faillogin',(req,res)=>{
     res.send({error:"Error en el inicio de sesión"});
 })
-
+routerSessions.get('/githubcallback', async(req, res)=>{
+    console.log('Failed Strategy');
+    res.send({error: 'Failed'});
+})
 
 export  default  routerSessions;

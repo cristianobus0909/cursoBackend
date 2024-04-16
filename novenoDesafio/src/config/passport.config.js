@@ -1,7 +1,7 @@
 import passport from  'passport';
 import local from 'passport-local';
 import userModel from '../models/userModel.js';
-import { createHash, isValidPassword } from '../utils';
+import { createHash, isValidPassword } from '../utils.js';
 
 
 const LocalStrategy = local.Strategy;
@@ -25,17 +25,11 @@ const initializePassport = () => {
             let result = await userModel.create(newUser);
             return done(null, result);
         } catch (error) {
-            return done('Error al obtener el usuario:' + error)
+            return done(error)
         }
     }));
-    passport.serializeUser((user,done)=>{
-        done(null,user._id);
-    });
-    passport.deserializeUser(async()=>{
-        let user = await userModel.findById(id);
-        return done(null,user);
-    });
     passport.use('login', new LocalStrategy({
+        passReqToCallback: true,
         usernameField: 'email' 
     }, async(username,password,done)=>{
         try {
@@ -49,6 +43,19 @@ const initializePassport = () => {
             return done(error);
         }
     }));
+    passport.serializeUser((user,done)=>{
+        done(null,user._id);
+    });
+    passport.deserializeUser(async(id,done)=>{
+        try {
+            let user = await userModel.findById(id);
+            done(null,user);
+        } catch (error) {
+            console.error('Error al desserializar el usuario:'+ error)
+        }
+    });
+
+
 };
 
 export default initializePassport;
