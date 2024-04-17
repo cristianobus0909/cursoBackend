@@ -6,9 +6,11 @@ import mongoose from 'mongoose';
 import routerViews from './routes/users.views.routes.js';
 import routerSessions from './routes/sessions.routes.js';
 import viewsRouter from './routes/views.routes.js';
+import bodyParser from 'body-parser'
 import MongoStore from  'connect-mongo';
 import dotenv from  'dotenv';
 import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -17,8 +19,9 @@ const PORT = process.env.PORT || 8080;
 
 
 const URL_MONGO = process.env.URL_MONGO;
-console.log(process.env.URL_MONGO)
+console.log(process.env.URL_MONGO);
 
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -30,7 +33,7 @@ app.use('/', express.static( __dirname + "/public"));
 
 app.use(cookieParser("s3cr3tC00ck13"));
 
-app.use(bodyParser.json());
+
 
 app.use(session({
     store: MongoStore.create({

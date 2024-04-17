@@ -16,7 +16,7 @@ routerViews.get('/', (req, res) => {
     })
 });
 routerViews.get( '/logout', (req,res)=>{
-    res.redirect("/login")
+    res.redirect("/")
 });
 
 

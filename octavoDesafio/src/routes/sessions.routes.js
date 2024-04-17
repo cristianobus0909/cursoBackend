@@ -3,10 +3,10 @@ import userModel from "../models/userModel.js";
 
 const routerSessions = Router();
 
+
 routerSessions.post('/register', async (req, res) => {
     try{
         const { first_name, last_name, age, email, password } = req.body;
-        console.log(req.body);
         const exist = await userModel.findOne( {email: email} );
         if (exist) {
             return  res.status(409).json({ message: 'User already exists' });
@@ -29,6 +29,7 @@ routerSessions.post('/register', async (req, res) => {
 routerSessions.post('/login', async(req, res) => {
     const {email, password} = req.body
     const user = await userModel.findOne({email,password})
+    console.log(user);
     if (!user) {
         return res.status(401).json('No autorizado')
     }
@@ -36,13 +37,15 @@ routerSessions.post('/login', async(req, res) => {
         name:`${user.first_name} ${user.last_name}`,
         email:user.email,
         age:user.age,
+        role:''
     }
     if (user.email === "adminCoder@coder.com" && user.password === "adminCod3r123") {
             req.session.user.role = "admin"
+            console.log("Tenes privilegios de "+ req.session.user.role);
     } else {
             req.session.user.role = "user"
-        console.log("Tenes privilegios de"+ req.session.user.role);
-}
+            console.log("Tenes privilegios de "+ req.session.user.role);
+    }
     res.status(200).send({payload: req.session.user, message: 'Inicio de sesion exitoso'});
 
 });
