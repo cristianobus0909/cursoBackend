@@ -7,27 +7,6 @@ const routerSessions = Router();
 
 routerSessions.post('/register', passport.authenticate('register',{failureRedirect:'/api/sessions/failregister'}), async (req, res) => {
     res.send({status:'success', message: 'User registered'})
-    // try{
-    //     const { first_name, last_name, age, email, password } = req.body;
-    //     console.log(req.body);
-    //     const exist = await userModel.findOne( {email: email} );
-    //     if (exist) {
-    //         return  res.status(409).json({ message: 'User already exists' });
-    //     }
-        
-    //     const user = {
-    //         first_name,
-    //         last_name,
-    //         age,
-    //         email,
-    //         password: createHash(password)
-    //     };
-    //     const result = await userModel.create(user);
-    //     res.status(200).json("Usuario creado con exito" + result.id);
-    // } catch(err){
-    //     console.error(err.message);
-    //     res.status(500).send("Server error");
-    // }
 });
 routerSessions.get('/failregister', async(req, res)=>{
     console.log('Failed Strategy');
@@ -63,6 +42,7 @@ routerSessions.get("/logout", (req,res)=>{
 routerSessions.get('/faillogin',(req,res)=>{
     res.send({error:"Error en el inicio de sesión"});
 })
+
 routerSessions.get('/githubcallback', async(req, res)=>{
     console.log('Failed Strategy');
     res.send({error: 'Failed'});
