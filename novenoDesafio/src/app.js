@@ -11,6 +11,7 @@ import dotenv from  'dotenv';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
+import routerGithub from './routes/githubloguin.views.routes.js';
 
 
 dotenv.config();
@@ -52,6 +53,7 @@ initializePassport();
 app.use('/', viewsRouter)
 app.use('/users',routerViews)
 app.use('/api/sessions',routerSessions)
+app.use('/github',routerGithub)
 
 mongoose.connect(URL_MONGO, {dbName: 'ecommerce'})
     .then(()=>{
