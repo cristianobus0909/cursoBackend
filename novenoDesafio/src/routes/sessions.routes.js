@@ -13,20 +13,15 @@ routerSessions.get('/failregister', async(req, res)=>{
     res.send({error: 'Failed'});
 })
 routerSessions.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/faillogin'}), async(req, res) => {
-    const {email, password} = req.body
-    const user = await userModel.findOne({email,password})
-    if (!user) {
-        return res.status(401).json('No autorizado')
+    if (!req.user) {
+        return res.status(400).json('Credenciales Incorrectas')
     }
-    // if (!isValidPassword(user.password)) return  res.status(401).json('Contraseña incorrecta');
-    // delete  user.password;
-    //console.log(user);
     req.session.user = {
-        name:`${user.first_name} ${user.last_name}`,
-        email:user.email,
-        age:user.age
+        name:`${req.user.first_name} ${req.user.last_name}`,
+        email:req.user.email,
+        age:req.user.age
     }
-    res.status(200).send({payload: req.session.user, message: 'Inicio de sesion exitoso'});
+    res.status(200).send({payload: req.user, message: 'Inicio de sesion exitoso'});
 
 });
 //Eliminar la session y cerrar la sesion del usuario
@@ -34,9 +29,9 @@ routerSessions.get("/logout", (req,res)=>{
     req.session.destroy((error) => {
         if (error) {
             res.status(500).send({ message: "Error al Cerrar Sesión", error });
-        } else {
-            res.redirect("/");
         }
+        res.redirect("/");
+        
     });
 });
 

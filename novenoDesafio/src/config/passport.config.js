@@ -30,16 +30,17 @@ const initializePassport = () => {
         }
     }));
     passport.use('login', new LocalStrategy({
-        passReqToCallback: true,
         usernameField: 'email' 
-    }, async(username,password,done)=>{
+    }, async(userName,password,done)=>{
         try {
-            const user = await userModel.findOne({email:username});
-            if (!user || !isValidPassword(user.password, password)) {
-                return done(null,false,'No se ha encontrado un usuario con esas credenciales');
-            } else {
-                return done(null,user);
+            const user = await userModel.findOne({email:userName});
+            if (!user) {
+                console.log({ message: 'No se ha encontrado un usuario con esas credenciales' });
+                return done(null, false);
             }
+            if (!isValidPassword(user,password)) return done(null, false);
+            return done(null,user);
+            
         } catch (error) {
             return done(error);
         }
@@ -58,7 +59,7 @@ const initializePassport = () => {
     passport.use('github', new GitHubStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callBackURL: "http://localhost:8080/api/sessions/githubcallback"
+        callbackURL: "http://localhost:8080/api/sessions/githubcallback"
     }, async(accessToken,refreshToken,profile,done)=>{
         try {
             console.log(profile);
