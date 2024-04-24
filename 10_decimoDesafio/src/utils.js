@@ -15,7 +15,7 @@ export const isValidPassword = (user,password)=> bcrypt.compareSync(password, us
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "privatekey";
 
 export  const generateToken = (user)=>{
-    return jwt.sign({user},PRIVATE_KEY,{expiresIn: '24HS'})
+    return jwt.sign({user},PRIVATE_KEY,{expiresIn: '1HS'})
 }
 
 export const authToken = (req,res,next) =>{
@@ -44,5 +44,15 @@ export const passportCall = (strategy)=>{
         })(req,res,next);
     };
 }
+
+export const  autorization = (role)=>{
+    return async (req,res,next)=>{
+        if(!req.user) return res.status(401).send({message : 'No Autorizado'});
+        if (req.user.role !== role) {
+            return res.status(403).send('Forbidden: El usuario no tiene permisos con este rol.')
+        };
+        next();
+    };
+};
 
 export default __dirname;

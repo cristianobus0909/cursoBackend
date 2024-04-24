@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { authToken, generateToken } from "../utils";
+import { authToken, generateToken } from "../utils.js";
 
 const router = Router();
 
@@ -29,7 +29,11 @@ router.post('/login', passport.authenticate('login',{failureRedirect:'/api/jwt/l
             return  res.status(500).json("Error interno de la aplicacion")
         }
 
-})
+});
 router.post("/register",passport.authenticate('register', {session:false}), async (req,res)=>{
     console.log('Registrando usuario: ', req.body);
-})
+    res.status(201).send({status:'success', message: 'usuario creado correctamente'});
+});
+
+
+export default router;
