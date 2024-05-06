@@ -1,21 +1,22 @@
 import express from  'express';
 import __dirname from  './utils.js' ;
 import handlebars from  'express-handlebars' ;
-import dotenv from  'dotenv';
 import mongoose from  'mongoose';
 import cookieParser from   'cookie-parser';
 
 import initializePassport from './config/passport.config.js';
 
+import config from './config/config.js';
+
 import routerViews from './routes/views.routes.js';
 import usersViewsRouter from './routes/users.views.routes.js'
 import UsersExtendRouter from './routes/custom/user.extend.router.js';
 import jwtRouter from  './routes/jwt.routes.js';
-dotenv.config()
+
 
 const app = express();
-const PORT =  process.env.PORT || 3001;
-const URL_MONGO = process.env.URL_MONGO;
+const PORT =  config.port
+const URL_MONGO = config.db;
 
 const userExtendRouter = new  UsersExtendRouter();
 
